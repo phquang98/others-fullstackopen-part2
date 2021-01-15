@@ -1,69 +1,60 @@
-import React, { Fragment } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
-const Header = ({ course }) => {
-  return (
-    <Fragment>
-      <h1>{course}</h1>
-    </Fragment>
-  );
-};
-
-const Part = ({ part, exercise }) => {
-  return (
-    <Fragment>
-      <p>
-        {part} {exercise}
-      </p>
-    </Fragment>
-  );
-};
-
-const Content = ({ data }) => {
-  return (
-    <Fragment>
-      {data.map((dataUnit) => (
-        <Part part={dataUnit.name} exercise={dataUnit.exercises}></Part>
-      ))}
-    </Fragment>
-  );
-};
-
-const Total = ({ data }) => {
-  let totalExes = 0;
-  data.map((dataUnit) => (totalExes = Number(totalExes) + Number(dataUnit.exercises)));
-
-  return (
-    <Fragment>
-      <p>Number of exercises {totalExes}</p>
-    </Fragment>
-  );
-};
+import Course from "./components/Course";
 
 const App = () => {
-  const course = {
-    name: "Half Stack application development",
-    parts: [
-      {
-        name: "Fundamentals of React",
-        exercises: 10,
-      },
-      {
-        name: "Using props to pass data",
-        exercises: 7,
-      },
-      {
-        name: "State of a component",
-        exercises: 14,
-      },
-    ],
-  };
+  const courses = [
+    {
+      name: "Half Stack application development",
+      id: 1,
+      parts: [
+        {
+          name: "Fundamentals of React",
+          exercises: 10,
+          id: 1,
+        },
+        {
+          name: "Using props to pass data",
+          exercises: 7,
+          id: 2,
+        },
+        {
+          name: "State of a component",
+          exercises: 14,
+          id: 3,
+        },
+        {
+          name: "Redux",
+          exercises: 11,
+          id: 4,
+        },
+      ],
+    },
+    {
+      name: "Node.js",
+      id: 2,
+      parts: [
+        {
+          name: "Routing",
+          exercises: 3,
+          id: 1,
+        },
+        {
+          name: "Middlewares",
+          exercises: 7,
+          id: 2,
+        },
+      ],
+    },
+  ];
 
   return (
     <div>
-      <Header course={course.name} />
-      <Content data={course.parts} />
-      <Total data={course.parts} />
+      <h1>Web Dev Curriculum</h1>
+      {courses.map((course) => (
+        <Course key={course.id} courseData={course} />
+      ))}
     </div>
   );
 };
